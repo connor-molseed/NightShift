@@ -1,2 +1,11 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Explicitly declare C# source files to use specific line endings
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.sln text eol=crlf
+
+# Ensure web/config files are handled correctly
+*.json text eol=lf
+*.md text eol=lf
