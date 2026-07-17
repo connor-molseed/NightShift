@@ -46,9 +46,6 @@ public class Looker : MonoBehaviour
         _cameraPitch += -input * _vSensitivity;
         _cameraPitch = Mathf.Clamp(_cameraPitch, -maxCamPitch, minCamPitch);
 
-        //_camera.transform.Rotate(_camera.transform.right, _cameraPitch);
-        Debug.Log(_cameraPitch);
-
         _camera.transform.localRotation = Quaternion.Euler(_cameraPitch, 0, 0);
     }
 }
