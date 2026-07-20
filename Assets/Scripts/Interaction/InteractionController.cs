@@ -44,7 +44,7 @@ public class InteractionController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, _maxDistance, ~_ignoredLayers))
         {
-            IInteractable target = hit.collider.GetComponent<IInteractable>();
+            IInteractable target = hit.collider.attachedRigidbody?.GetComponent<IInteractable>();
             if (target != null)
             {
                 _target = target;
