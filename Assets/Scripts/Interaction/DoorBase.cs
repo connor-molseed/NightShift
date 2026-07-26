@@ -9,6 +9,7 @@ public class DoorBase : InteractableBase
     [SerializeField] protected float _openAngle = 90f;
     [SerializeField] protected float _openDuration = 0.8f;
     [SerializeField] protected bool _lockedOnStart = false;
+    [SerializeField] protected bool _canBeLocked = true;
     [SerializeField] protected GameObject _doorMesh;
 
     //State Variables
@@ -42,6 +43,12 @@ public class DoorBase : InteractableBase
     protected override void OnInteractHold(GameObject user)
     {
         Debug.Log("Im holding a door!");
+
+        Inventory userInv = user.GetComponent<Inventory>();
+        if (userInv != null && userInv.HasKey)
+            ToggleLockDoor(user);
+        else
+            Debug.Log("I don't have the key");
     }
 
     protected void UseDoor(GameObject user)
@@ -55,24 +62,53 @@ public class DoorBase : InteractableBase
 
         if (!_isOpen)
         {
-            _isOpen = true;
-            OnUsedOpen?.Invoke();
             Vector3 dirToUser = (user.transform.position - transform.position).normalized;
             float dotProduct = Vector3.Dot(transform.forward, dirToUser);
-            Quaternion targetRotation = Quaternion.AngleAxis(_openAngle * Mathf.Sign(dotProduct), _doorMesh.transform.up);
 
-            if (_curRotRoutine != null) StopCoroutine(_curRotRoutine);
-            _curRotRoutine = StartCoroutine(RotateOverTime(targetRotation, 0.8f));
+            Open(dotProduct);
         }
         else
         {
-            _isOpen = false;
-            OnUsedClose?.Invoke();
-            Quaternion targetRotation = Quaternion.AngleAxis(0, _doorMesh.transform.up);
-
-            if (_curRotRoutine != null) StopCoroutine(_curRotRoutine);
-            _curRotRoutine = StartCoroutine(RotateOverTime(targetRotation, 0.8f));
+            Close();
         }
+    }
+
+    protected void ToggleLockDoor(GameObject user)
+    {
+        if (!_canBeLocked) return;
+
+        //If locked, unlock door
+        if (_isLocked)
+        {
+            _isLocked = false;
+        }
+        //If unlocked, close and lock door
+        else
+        {
+            Close();
+            _isLocked = true;
+        }
+    }
+
+    protected void Open(float direction)
+    {
+        _isOpen = true;
+        OnUsedOpen?.Invoke();
+
+        Quaternion targetRotation = Quaternion.AngleAxis(_openAngle * Mathf.Sign(direction), _doorMesh.transform.up);
+
+        if (_curRotRoutine != null) StopCoroutine(_curRotRoutine);
+        _curRotRoutine = StartCoroutine(RotateOverTime(targetRotation, 0.8f));
+    }
+
+    protected void Close()
+    {
+        _isOpen = false;
+        OnUsedClose?.Invoke();
+        Quaternion targetRotation = Quaternion.AngleAxis(0, _doorMesh.transform.up);
+
+        if (_curRotRoutine != null) StopCoroutine(_curRotRoutine);
+        _curRotRoutine = StartCoroutine(RotateOverTime(targetRotation, 0.8f));
     }
 
     //Switch to use either a tween or a per door animation for better control

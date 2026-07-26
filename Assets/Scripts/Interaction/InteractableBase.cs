@@ -10,6 +10,7 @@ public class InteractableBase : MonoBehaviour, IInteractable
 {
     public void Interact(InteractContext context)
     {
+        Debug.Log("An interaction is detected");
         if (context._inputType == InputType.Press)
             OnInteractPress(context._user);
         else if (context._inputType == InputType.Hold)

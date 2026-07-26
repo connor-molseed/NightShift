@@ -5,8 +5,6 @@ using UnityEngine.InputSystem.Interactions;
 public class InteractionController : MonoBehaviour
 {
     [SerializeField] protected InputActionReference _interactButton;
-
-    //Duplicates behaviour in PickupObject.cs, may need to split into shared class??
     [SerializeField] protected float _maxDistance = 20f;
     [SerializeField] protected LayerMask _ignoredLayers;
     protected IInteractable _target;
@@ -44,15 +42,10 @@ public class InteractionController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, _maxDistance, ~_ignoredLayers))
         {
-            IInteractable target = hit.collider.attachedRigidbody?.GetComponent<IInteractable>();
-            if (target != null)
-            {
-                _target = target;
-            }
+            if (hit.collider.attachedRigidbody != null)
+                _target = hit.collider.attachedRigidbody.GetComponent<IInteractable>();
             else
-            {
-                _target = null;
-            }
+                _target = hit.collider.GetComponent<IInteractable>();
         }
     }
     
