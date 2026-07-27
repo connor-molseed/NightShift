@@ -3,7 +3,7 @@ using UltEvents;
 using UnityEngine;
 
 //TODO Do we split door into its own thing (See InteractableBase.cs)
-public class DoorBase : InteractableBase
+public class DoorBase : MonoBehaviour
 {
     //Config Parameters
     [SerializeField] protected float _openAngle = 90f;
@@ -34,13 +34,13 @@ public class DoorBase : InteractableBase
         _isLocked = _lockedOnStart;
     }
 
-    protected override void OnInteractPress(GameObject user)
+    protected void Handle_OnInteractPress(GameObject user)
     {
         Debug.Log("Im pressing a door!");
         UseDoor(user);
     }
 
-    protected override void OnInteractHold(GameObject user)
+    protected void Handle_OnInteractHold(GameObject user)
     {
         Debug.Log("Im holding a door!");
 

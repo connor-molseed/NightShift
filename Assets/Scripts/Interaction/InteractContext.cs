@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public struct InteractContext
+public struct InteractionContext
 {
     public GameObject _user;
     public InputType _inputType;
 
-    public InteractContext (GameObject user, InputType inputType = InputType.Press)
+    public InteractionContext (GameObject user, InputType inputType = InputType.Press)
     {
         _user = user;
         _inputType = inputType;

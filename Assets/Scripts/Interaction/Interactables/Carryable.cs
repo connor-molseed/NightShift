@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Carryable : InteractableBase
+public class Carryable : MonoBehaviour
 {
     private int _originalLayer;
     protected Rigidbody _rb;
@@ -20,7 +20,7 @@ public class Carryable : InteractableBase
         _rb.isKinematic = !enable;
     }
 
-    protected override void OnInteractPress(GameObject user)
+    protected void Handle_OnInteractPress(GameObject user)
     {
         Debug.Log("Insert Pickup Line");
         CarryController carryCont = user.GetComponent<CarryController>();

@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarryController
   _itemAttachPoint: {fileID: 6156220736173353574}
+  _dropButton: {fileID: 5347709621720356483, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  _dropDistance: 0
 --- !u!114 &2256984125074994051
 MonoBehaviour:
   m_ObjectHideFlags: 0

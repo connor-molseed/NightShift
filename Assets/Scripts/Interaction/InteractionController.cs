@@ -7,7 +7,7 @@ public class InteractionController : MonoBehaviour
     [SerializeField] protected InputActionReference _interactButton;
     [SerializeField] protected float _maxDistance = 20f;
     [SerializeField] protected LayerMask _ignoredLayers;
-    protected IInteractable _target;
+    protected Interaction _target;
     protected Camera _camera;
 
     void Start()
@@ -43,9 +43,9 @@ public class InteractionController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, _maxDistance, ~_ignoredLayers))
         {
             if (hit.collider.attachedRigidbody != null)
-                _target = hit.collider.attachedRigidbody.GetComponent<IInteractable>();
+                _target = hit.collider.attachedRigidbody.GetComponent<Interaction>();
             else
-                _target = hit.collider.GetComponent<IInteractable>();
+                _target = hit.collider.GetComponent<Interaction>();
         }
     }
     
@@ -61,7 +61,7 @@ public class InteractionController : MonoBehaviour
     {
         if (_target != null)
         {
-            InteractContext context = new InteractContext(gameObject, inputType);
+            InteractionContext context = new InteractionContext(gameObject, inputType);
             _target.Interact(context);
             return true;
         }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2587090461388526709}
   - component: {fileID: 4655605202495805599}
+  - component: {fileID: 6629507780005468867}
   - component: {fileID: 3075041943925397039}
   m_Layer: 0
   m_Name: DoorBase
@@ -61,6 +62,47 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &6629507780005468867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227068524822882122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cc1c52a7d4640439e23fe6e42ab6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction
+  _printDebugMessages: 1
+  InteractPressed:
+    _PersistentCalls:
+    - _Target: {fileID: 3075041943925397039}
+      _MemberName: Handle_OnInteractPress
+      _PersistentArguments:
+      - _Type: 14
+        _Int: 0
+        _String: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
+  InteractHeld:
+    _PersistentCalls:
+    - _Target: {fileID: 3075041943925397039}
+      _MemberName: Handle_OnInteractHold
+      _PersistentArguments:
+      - _Type: 14
+        _Int: 0
+        _String: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
 --- !u!114 &3075041943925397039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,8 +116,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorBase
   _openAngle: 90
+  _openDuration: 0.8
   _lockedOnStart: 0
+  _canBeLocked: 1
   _doorMesh: {fileID: 8755175628605239872}
+  OnUsedOpen:
+    _PersistentCalls: []
+  OnUsedLocked:
+    _PersistentCalls: []
+  OnUsedClose:
+    _PersistentCalls: []
 --- !u!1 &5401119975349552931
 GameObject:
   m_ObjectHideFlags: 0

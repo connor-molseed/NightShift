@@ -1,8 +1,11 @@
+using System;
+
+[Obsolete("Use Interaction instead.")]
 public interface IInteractable
 {
     //Properties
     bool CanInteract => true;
     
     //Methods
-    void Interact (InteractContext context);
+    void Interact (InteractionContext context);
 }

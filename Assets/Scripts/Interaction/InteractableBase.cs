@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 //TODO technically a project issue not this script -> change variable syntax to standard?
@@ -6,9 +7,10 @@ using UnityEngine;
     May want UI to sync with interact elements, but they'll get buried in complex interactables
     Helps seperate the logic of Interactable and the logic of an items specific behaviour
 **/
+[Obsolete("Use Interaction instead.")]
 public class InteractableBase : MonoBehaviour, IInteractable
 {
-    public void Interact(InteractContext context)
+    public void Interact(InteractionContext context)
     {
         Debug.Log("An interaction is detected");
         if (context._inputType == InputType.Press)
