@@ -1,31 +1,37 @@
+using TMPro;
 using UnityEngine;
 
 public class Paranoia : MonoBehaviour
 {
-    public int value;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static int value;
+    public TextMeshProUGUI tmp;
+
+    private void Update()
     {
-        
+      if (tmp != null)
+        {
+            tmp.text = value.ToString();
+        }  
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        StatTracker.OnParanoiaChange += ChangeValue;
     }
 
-    public void IncreaseValue(int amt)
+    private void OnDisable()
+    {
+        StatTracker.OnParanoiaChange -= ChangeValue;
+    }
+
+    public static void ChangeValue(int amt)
     {
         value += amt;
-    }
-
-    public void DecreaseValue(int amt)
-    {
-        value -= amt;
         if (value < 0)
         {
             value = 0;
         }
+
+        Debug.Log(value);
     }
 }

@@ -20,10 +20,12 @@ public class InteractableBase : MonoBehaviour, IInteractable
     protected virtual void OnInteractPress(GameObject user)
     {
         Debug.Log("This was only a press, but no behaviour is defined");
+        StatTracker.ModifyParanoia(1);
     }
 
     protected virtual void OnInteractHold(GameObject user)
     {
         Debug.Log("This was a full hold! But not behaviour was defined");
+        StatTracker.ModifyParanoia(-1);
     }
 }
