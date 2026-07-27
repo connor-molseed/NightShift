@@ -42,8 +42,12 @@ public class CarryController : MonoBehaviour
 
         if (_heldItem != null)
         {
-            Debug.Log($"Already holding {_heldItem.name}, and cannot carry anymore");
-            return false;
+            if (!TryDropObject(obj.transform.position))
+            {
+                Debug.Log($"Already holding {_heldItem.name}, and cannot currently drop it");
+                return false;
+            }
+            Debug.Log($"Already had an item, but swapped it with the new one");
         }
 
         _heldItem = obj;
