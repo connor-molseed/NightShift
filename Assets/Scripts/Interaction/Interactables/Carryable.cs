@@ -1,14 +1,23 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Carryable : InteractableBase
 {
-    private int originalLayer;
+    private int _originalLayer;
+    protected Rigidbody _rb;
 
-    public int OriginalLayer => originalLayer;
+    public int OriginalLayer => _originalLayer;
 
     protected virtual void Awake()
     {
-        originalLayer = gameObject.layer;
+        _originalLayer = gameObject.layer;
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    public void EnablePhysics(bool enable)
+    {
+        _rb.useGravity = enable;
+        _rb.isKinematic = !enable;
     }
 
     protected override void OnInteractPress(GameObject user)
@@ -18,7 +27,7 @@ public class Carryable : InteractableBase
 
         if (carryCont)
         {
-            carryCont.PickupObject(this);
+            carryCont.TryPickupObject(this);
         }
     }
 }
