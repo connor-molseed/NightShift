@@ -1549,7 +1549,7 @@ PrefabInstance:
       objectReference: {fileID: 1110714456}
     - target: {fileID: 613042277781834495, guid: c44f692e42f33f746af26df68ef024d1, type: 3}
       propertyPath: m_VersionIndex
-      value: 1284
+      value: 1299
       objectReference: {fileID: 0}
     - target: {fileID: 791740025430594651, guid: c44f692e42f33f746af26df68ef024d1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5634,6 +5634,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1561504947048795877, guid: 5446121dbb841704fbe821443d34dd20, type: 3}
+      propertyPath: _dropButton
+      value: 
+      objectReference: {fileID: 5347709621720356483, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     - target: {fileID: 1937903021817352192, guid: 5446121dbb841704fbe821443d34dd20, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5697,7 +5701,7 @@ PrefabInstance:
       objectReference: {fileID: 789264937}
     - target: {fileID: 613042277781834495, guid: c44f692e42f33f746af26df68ef024d1, type: 3}
       propertyPath: m_VersionIndex
-      value: 1284
+      value: 1299
       objectReference: {fileID: 0}
     - target: {fileID: 791740025430594651, guid: c44f692e42f33f746af26df68ef024d1, type: 3}
       propertyPath: m_LocalPosition.x
