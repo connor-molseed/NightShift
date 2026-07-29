@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[Obsolete("No longer used. Use CarryController instead.")]
 public class PickupObject : MonoBehaviour
 {
     //Config Parameters

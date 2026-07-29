@@ -2,7 +2,7 @@ using System.Collections;
 using UltEvents;
 using UnityEngine;
 
-//TODO Do we split door into its own thing (See InteractableBase.cs)
+//TODO Split door into the core, and the open/close and unlock/lock behaviours
 public class DoorBase : MonoBehaviour
 {
     //Config Parameters
@@ -34,19 +34,19 @@ public class DoorBase : MonoBehaviour
         _isLocked = _lockedOnStart;
     }
 
-    protected void Handle_OnInteractPress(GameObject user)
+    protected void Handle_OnInteractPress(InteractionContext context)
     {
         Debug.Log("Im pressing a door!");
-        UseDoor(user);
+        UseDoor(context.User);
     }
 
-    protected void Handle_OnInteractHold(GameObject user)
+    protected void Handle_OnInteractHold(InteractionContext context)
     {
         Debug.Log("Im holding a door!");
 
-        Inventory userInv = user.GetComponent<Inventory>();
+        Inventory userInv = context.User.GetComponent<Inventory>();
         if (userInv != null && userInv.HasKey)
-            ToggleLockDoor(user);
+            ToggleLockDoor(context.User);
         else
             Debug.Log("I don't have the key");
     }

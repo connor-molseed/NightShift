@@ -13,15 +13,19 @@ public class Interaction : MonoBehaviour
     //Properties
     
     //Events
-    public UltEvent<GameObject> InteractPressed;
-    public UltEvent<GameObject> InteractHeld;
+    public UltEvent<InteractionContext> InteractPressed;
+    public UltEvent<InteractionContext> InteractHeld;
 
     public void Interact(InteractionContext context)
     {
         Debug.Log($"{name} was interacted with.");
-        if (context._inputType == InputType.Press)
-            InteractPressed.Invoke(context._user);
-        else if (context._inputType == InputType.Hold)
-            InteractHeld.Invoke(context._user);
+        if (context.Type == InputType.Press)
+        {
+            InteractPressed.Invoke(context);
+        }
+        else if (context.Type == InputType.Hold)
+        {
+            InteractHeld.Invoke(context);
+        }
     }
 }

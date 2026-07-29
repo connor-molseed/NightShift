@@ -13,10 +13,10 @@ public class InteractableBase : MonoBehaviour, IInteractable
     public void Interact(InteractionContext context)
     {
         Debug.Log("An interaction is detected");
-        if (context._inputType == InputType.Press)
-            OnInteractPress(context._user);
-        else if (context._inputType == InputType.Hold)
-            OnInteractHold(context._user);
+        if (context.Type == InputType.Press)
+            OnInteractPress(context.User);
+        else if (context.Type == InputType.Hold)
+            OnInteractHold(context.User);
     }
 
     protected virtual void OnInteractPress(GameObject user)

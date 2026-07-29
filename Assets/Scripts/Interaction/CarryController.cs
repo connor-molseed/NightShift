@@ -29,6 +29,11 @@ public class CarryController : MonoBehaviour
         _dropButton.action.performed -= HandleDropInput;
     }
 
+    public Carryable GetCurrentObject()
+    {
+        return _heldItem;
+    }
+
     public void HandleDropInput(InputAction.CallbackContext context)
     {  
         if (_heldItem == null) return;

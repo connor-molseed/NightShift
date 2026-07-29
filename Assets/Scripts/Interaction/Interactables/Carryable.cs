@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -14,20 +15,27 @@ public class Carryable : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
+    protected void Handle_OnInteractPress(InteractionContext context)
+    {
+        TryPickupObject(context.User);
+    }
+
     public void EnablePhysics(bool enable)
     {
         _rb.useGravity = enable;
         _rb.isKinematic = !enable;
     }
 
-    protected void Handle_OnInteractPress(GameObject user)
+    public bool TryPickupObject(GameObject carrier)
     {
         Debug.Log("Insert Pickup Line");
-        CarryController carryCont = user.GetComponent<CarryController>();
+        CarryController carryCont = carrier.GetComponent<CarryController>();
 
         if (carryCont)
         {
-            carryCont.TryPickupObject(this);
+            return carryCont.TryPickupObject(this);
         }
+
+        return false;
     }
 }
