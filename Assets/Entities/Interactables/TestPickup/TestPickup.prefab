@@ -480,3 +480,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab2ab8605274904cae027c36b1d9af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Carryable
+  _itemData: {fileID: 11400000, guid: 8badea964ce7a214f926729a72b367da, type: 2}

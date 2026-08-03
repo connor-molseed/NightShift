@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1493c3038874ab64d85781774ae596c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxOfStock
+  _itemData: {fileID: 11400000, guid: 00162dc780c5a6d4d9f66c655c03f45e, type: 2}
   _startSealed: 1
   _stockPrefab: {fileID: 6150941482371667767, guid: 9b133d38a1eaebc4db7c86b3b050ece8, type: 3}
   _totalStock: 3

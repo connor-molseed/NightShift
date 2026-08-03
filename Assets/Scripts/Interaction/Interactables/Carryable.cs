@@ -4,9 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Carryable : MonoBehaviour
 {
+    [SerializeField] protected CarriedItemData _itemData;
+
     private int _originalLayer;
     protected Rigidbody _rb;
 
+    public CarriedItemData ItemData => _itemData;
     public int OriginalLayer => _originalLayer;
 
     protected virtual void Awake()
