@@ -7533,10 +7533,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2256984125074994051, guid: 5446121dbb841704fbe821443d34dd20, type: 3}
-      propertyPath: _hasCutter
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3576106798304820838, guid: 5446121dbb841704fbe821443d34dd20, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -18,7 +18,8 @@ public class Interaction : MonoBehaviour
 
     public void Interact(InteractionContext context)
     {
-        Debug.Log($"{name} was interacted with.");
+        if (_printDebugMessages) Debug.Log($"{name} was interacted with.");
+
         if (context.Type == InputType.Press)
         {
             InteractPressed.Invoke(context);
