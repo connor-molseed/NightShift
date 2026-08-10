@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3576106798304820838}
   - component: {fileID: 2525927799631619522}
+  - component: {fileID: 827507345997326498}
   - component: {fileID: 6336547505992275991}
   - component: {fileID: 3521858027219926946}
   - component: {fileID: 5996977638455927324}
@@ -95,6 +96,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &827507345997326498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937903021817352192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90828f42863dc624a83a50e7b3849747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!114 &6336547505992275991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   _hasKey: 1
+  _hasCutter: 1
 --- !u!1 &6869259770514306207
 GameObject:
   m_ObjectHideFlags: 0
