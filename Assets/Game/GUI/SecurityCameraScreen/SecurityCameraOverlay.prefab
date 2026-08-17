@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8339f7bbff9bdf48a57b2a38f9bba12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecurityCameraScreen
+  _cameras: []
+  _cycleCameraInput: {fileID: -8784545083839296357, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _closeUIInput: {fileID: 5347709621720356483, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _UICanvas: {fileID: 120328393752738676}
 --- !u!1 &4331070511906833220
