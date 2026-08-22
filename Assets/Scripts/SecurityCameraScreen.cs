@@ -1,13 +1,15 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+//TODO cameras bypass update frequency by switching back/forth. could use class that handles render update independantly 
 public class SecurityCameraScreen : MonoBehaviour
 {
     //Config Parameters
     [SerializeField] protected List<Camera> _cameras = new List<Camera>();
-
+    [SerializeField] protected float _updateDelay = 0.4f;
     [SerializeField] protected InputActionReference _cycleCameraInput;
     [SerializeField] protected InputActionReference _closeUIInput;
     [SerializeField] protected CanvasGroup _UICanvas;
@@ -17,6 +19,7 @@ public class SecurityCameraScreen : MonoBehaviour
     
     //Cached References
     protected PlayerController _player;
+    protected Coroutine _renderCoroutine;
 
     //Properties
 
@@ -39,7 +42,7 @@ public class SecurityCameraScreen : MonoBehaviour
 
     public void EnableUI()
     {
-        ForceActiveCamera(_curCameraIndex);
+        EnableCurrentCamera();
 
         _UICanvas.alpha = 1;
         _player.EnableControl(false);
@@ -63,6 +66,8 @@ public class SecurityCameraScreen : MonoBehaviour
 
     public void DisableUI()
     {
+        DisableCurrentCamera();
+        
         _player.EnableControl(true);
         _UICanvas.alpha = 0;
 
@@ -91,17 +96,29 @@ public class SecurityCameraScreen : MonoBehaviour
 
     protected void SwitchActiveCamera(int newCameraIndex)
     {
-        //Clean up currently active camera
-        _cameras[_curCameraIndex].enabled = false;
+        if (newCameraIndex == _curCameraIndex && _renderCoroutine != null) return;
         
+        DisableCurrentCamera();
         _curCameraIndex = newCameraIndex;
+        EnableCurrentCamera();
+    }
 
-        //Activate new camera
-        _cameras[_curCameraIndex].enabled = true;
+    protected void EnableCurrentCamera()
+    {
+        if (_updateDelay > float.Epsilon)
+            _renderCoroutine = StartCoroutine(CameraUpdateCoroutine());
+        else
+            _cameras[_curCameraIndex].enabled = true;
+    }
 
-        //Do something to stop process of new update enumerator if new and old are the same
-        //With slow updates, cameras aren't active, instead them get pushed to update, so may be simpler
-        //if (newCameraIndex == _curCameraIndex) return;
+    protected void DisableCurrentCamera()
+    {
+        if (_renderCoroutine != null)
+        {
+            StopCoroutine(_renderCoroutine);
+            _renderCoroutine = null;
+        }
+        _cameras[_curCameraIndex].enabled = false;
     }
 
     protected void CycleNextCamera()
@@ -116,5 +133,16 @@ public class SecurityCameraScreen : MonoBehaviour
         int newIndex = _curCameraIndex > 0 ? _curCameraIndex - 1 : _cameras.Count - 1;
 
         SwitchActiveCamera(newIndex);
+    }
+
+    protected IEnumerator CameraUpdateCoroutine()
+    {
+        Camera activeCam = _cameras[_curCameraIndex];
+
+        while(true)
+        {
+            activeCam.Render();
+            yield return new WaitForSeconds(_updateDelay);
+        }
     }
 }
