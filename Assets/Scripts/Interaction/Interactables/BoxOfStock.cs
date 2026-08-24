@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TODO Fix on hold interaction behaviour (currently only works if box is sealed)
 public class BoxOfStock : Carryable
 {
     //Config Parameters

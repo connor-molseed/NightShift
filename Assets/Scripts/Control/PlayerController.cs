@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     protected Mover _mover;
     protected Looker _looker;
     protected InteractionController _interactor;
+    protected Inventory _inventory;
 
     //Properties
+    public Inventory Inventory => _inventory;
 
     //Events
 
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
         _mover = GetComponent<Mover>();
         _looker = GetComponent<Looker>();
         _interactor = GetComponent<InteractionController>();
+        _inventory = GetComponent<Inventory>();
     }
 
     public void EnableControl(bool enable)

@@ -61,7 +61,7 @@ public class InteractionController : MonoBehaviour
     {
         if (_target != null)
         {
-            InteractionContext context = new InteractionContext(gameObject, inputType);
+            InteractionContext context = new InteractionContext(gameObject, inputType: inputType);
             _target.Interact(context);
             return true;
         }

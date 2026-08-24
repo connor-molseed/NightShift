@@ -14,6 +14,7 @@ public class CarryController : MonoBehaviour
     //Cached References
 
     //Properties
+    public Carryable CarriedItem => _heldItem;
 
     //Events
     void OnEnable()
