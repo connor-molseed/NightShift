@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6048285543725037863}
   - component: {fileID: -5510556509026064510}
+  - component: {fileID: 1126222903165052950}
+  - component: {fileID: 8105018800817562041}
+  - component: {fileID: 8501286247421580163}
   m_Layer: 0
   m_Name: PlacementPoint
   m_TagString: Untagged
@@ -54,6 +57,75 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1126222903165052950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836879766300666227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cc1c52a7d4640439e23fe6e42ab6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction
+  _printDebugMessages: 1
+  InteractPressed:
+    _PersistentCalls:
+    - _Target: {fileID: 8105018800817562041}
+      _MemberName: Handle_OnInteractPress
+      _PersistentArguments:
+      - _Type: 14
+        _Int: 0
+        _String: InteractionContext, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
+  InteractHeld:
+    _PersistentCalls: []
+--- !u!114 &8105018800817562041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836879766300666227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c42a162b862e72347b620a0bca310a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementPoint
+  _placementItemType: {fileID: 11400000, guid: 4349a85c6a6dff745a008b8532751246, type: 2}
+--- !u!114 &8501286247421580163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836879766300666227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c3510e63248cc4abea18ef4d8977cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameEvents
+  _event: {fileID: 11400000, guid: 847cf12f4066eb54db79adbdc7885f24, type: 2}
+  _response:
+    _PersistentCalls:
+    - _Target: {fileID: 8105018800817562041}
+      _MemberName: Handle_OnCarriedItemChanged
+      _PersistentArguments:
+      - _Type: 14
+        _Int: 1
+        _String: InventoryEventArgs, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
 --- !u!1 &5165326043448479388
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +374,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1224
+  m_VersionIndex: 1230
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

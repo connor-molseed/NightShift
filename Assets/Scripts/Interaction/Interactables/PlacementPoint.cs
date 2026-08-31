@@ -33,4 +33,16 @@ public class PlacementPoint : MonoBehaviour
             Debug.Log("This is the correct item for this spot");
         }
     }
+
+    protected void Handle_OnCarriedItemChanged(InventoryEventArgs args)
+    {
+        bool itemMatches = args.Inventory.GetCarriedItem()?.UniqueId == _placementItemType.UniqueId;
+
+        EnablePlacementPoint(itemMatches);
+    }
+
+    protected void EnablePlacementPoint(bool enable)
+    {
+        Debug.Log($"Item Matches: {enable}");
+    }
 }

@@ -1,3 +1,4 @@
+using UltEvents;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -16,6 +17,7 @@ public class Inventory : MonoBehaviour
     public bool HasCutter => _hasCutter;
 
     //Events
+    [SerializeField] protected UltEvent<GameObject, InventoryEventArgs> OnInventoryUpdated;
 
     protected void Awake()
     {
@@ -37,5 +39,15 @@ public class Inventory : MonoBehaviour
         if (_carryController == null || _carryController.CarriedItem == null) return null;
 
         return _carryController.CarriedItem.ItemData;
+    }
+
+    protected void TriggerInventoryUpdate()
+    {
+        InventoryEventArgs args = new InventoryEventArgs
+        {
+            Inventory = this
+        };
+        
+        OnInventoryUpdated?.Invoke(gameObject, args);
     }
 }
