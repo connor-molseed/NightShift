@@ -5,12 +5,22 @@ public class Interaction : MonoBehaviour
 {
     //Config Parameters
     [SerializeField] private bool _printDebugMessages = true;
+    [SerializeField] protected string _displayName = "Name";
+
     
     //State Variables
+    [SerializeField] protected bool _enabled = true;
     
     //Cached References
     
     //Properties
+    public bool IsEnabled 
+    { 
+        get { return _enabled; }
+        set { _enabled = value; }
+    }
+
+    public string DisplayName => _displayName;
     
     //Events
     public UltEvent<InteractionContext> InteractPressed;
