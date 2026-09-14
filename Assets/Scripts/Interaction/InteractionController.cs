@@ -59,7 +59,9 @@ public class InteractionController : MonoBehaviour
 
     bool TryDoInteract(InputType inputType)
     {
-        if (_target != null)
+        Debug.Log($"{_target?.name} is enabled: {_target?.IsEnabled}");
+
+        if (_target != null && _target.IsEnabled)
         {
             InteractionContext context = new InteractionContext(gameObject, inputType: inputType);
             _target.Interact(context);

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UltEvents;
 using System.Collections.Generic;
+using System;
 
 /**
     Global Event System Parts
@@ -22,6 +23,7 @@ public abstract class GlobalEvent<A> : ScriptableObject
     
     //State Variables
     private readonly List<IGlobalEventListener<A>> listeners = new List<IGlobalEventListener<A>>();
+    private Action<GameObject, A> onEventRaised;
     
     //Cached References
     
@@ -29,9 +31,14 @@ public abstract class GlobalEvent<A> : ScriptableObject
     
     //Events
     
+    public void Raise(GameObject source, A args)
+    {
+        Debug.Log($"Global Event Raised: {name}");
+        onEventRaised?.Invoke(source, args);
+    }
 
-    public void RegisterListener(IGlobalEventListener<A> listener) => listeners.Add(listener);
-    public void DeregisterListener(IGlobalEventListener<A> listener) => listeners.Add(listener);
+    public void RegisterListener(IGlobalEventListener<A> listener) => onEventRaised += listener.OnEventRaised; //listeners.Add(listener);
+    public void DeregisterListener(IGlobalEventListener<A> listener) => onEventRaised -= listener.OnEventRaised; //listeners.Add(listener);
 }
 
 /// <summary>

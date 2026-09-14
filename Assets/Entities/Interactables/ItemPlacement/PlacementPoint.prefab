@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction
   _printDebugMessages: 1
+  _enabled: 1
   InteractPressed:
     _PersistentCalls:
     - _Target: {fileID: 8105018800817562041}
@@ -99,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementPoint
   _placementItemType: {fileID: 11400000, guid: 4349a85c6a6dff745a008b8532751246, type: 2}
+  _placementOutline: {fileID: 5165326043448479388}
+  _interaction: {fileID: 1126222903165052950}
 --- !u!114 &8501286247421580163
 MonoBehaviour:
   m_ObjectHideFlags: 0

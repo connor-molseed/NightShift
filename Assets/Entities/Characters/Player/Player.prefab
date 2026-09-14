@@ -185,6 +185,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   _hasKey: 1
   _hasCutter: 1
+  OnInventoryUpdated:
+    _PersistentCalls:
+    - _Target: {fileID: 11400000, guid: 847cf12f4066eb54db79adbdc7885f24, type: 2}
+      _MemberName: 
+      _PersistentArguments: []
 --- !u!1 &6869259770514306207
 GameObject:
   m_ObjectHideFlags: 0

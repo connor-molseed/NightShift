@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction
   _printDebugMessages: 1
+  _displayName: Name
+  _enabled: 0
   InteractPressed:
     _PersistentCalls:
     - _Target: {fileID: 3075041943925397039}

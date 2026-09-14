@@ -8,21 +8,18 @@ public class Inventory : MonoBehaviour
     //State Variables
     [SerializeField] protected bool _hasKey = true;
     [SerializeField] protected bool _hasCutter = true;
+    [SerializeField] protected CarriedItemData _carriedItem;
     
     //Cached References
-    protected CarryController _carryController;
+
     
     //Properties
     public bool HasKey => _hasKey;
     public bool HasCutter => _hasCutter;
+    public CarriedItemData CarriedItem => _carriedItem;
 
     //Events
     [SerializeField] protected UltEvent<GameObject, InventoryEventArgs> OnInventoryUpdated;
-
-    protected void Awake()
-    {
-        _carryController = GetComponent<CarryController>();
-    }
 
     public void SetHasKey(bool hasKey)
     {
@@ -34,11 +31,10 @@ public class Inventory : MonoBehaviour
         _hasCutter = hasCutter;
     }
 
-    public CarriedItemData GetCarriedItem()
+    public void SetCarriedItem(CarriedItemData item)
     {
-        if (_carryController == null || _carryController.CarriedItem == null) return null;
-
-        return _carryController.CarriedItem.ItemData;
+        _carriedItem = item;
+        TriggerInventoryUpdate();
     }
 
     protected void TriggerInventoryUpdate()

@@ -12,11 +12,19 @@ public class CarryController : MonoBehaviour
     protected Carryable _heldItem;
 
     //Cached References
+    protected Inventory _inventory;
 
     //Properties
     public Carryable CarriedItem => _heldItem;
 
     //Events
+
+
+    void Awake()
+    {
+        _inventory = GetComponent<Inventory>();
+    }
+
     void OnEnable()
     {
         Debug.Log("Doing an enable");
@@ -63,6 +71,8 @@ public class CarryController : MonoBehaviour
         _heldItem.gameObject.layer = LayerMask.NameToLayer("Player");
         _heldItem.EnablePhysics(false);
 
+        _inventory.SetCarriedItem(_heldItem.ItemData);
+
         Debug.Log($"Now carrying {_heldItem.name}");
         
         return true;
@@ -79,6 +89,7 @@ public class CarryController : MonoBehaviour
 
         Debug.Log($"{_heldItem.name} has been put down again");
         _heldItem = null;
+        _inventory.SetCarriedItem(null);
 
         return true;
     }
