@@ -3,12 +3,9 @@ using UnityEngine;
 public class PlacementPoint : MonoBehaviour
 {
     //Config Parameters
-    [SerializeField]
-    protected CarriedItemData _placementItemType;
-    [SerializeField]
-    protected GameObject _placementOutline;
-    [SerializeField]
-    protected Interaction _interaction;
+    [SerializeField] protected CarriedItemData _itemType;
+    [SerializeField] protected GameObject _placementOutline;
+    [SerializeField] protected Interaction _interaction;
     
     //State Variables
     
@@ -18,36 +15,44 @@ public class PlacementPoint : MonoBehaviour
     
     //Events
 
-    protected void Awake()
+    private void Awake()
     {
         EnablePlacementPoint(false);
     }
-    
-    protected void Handle_OnInteractPress(InteractionContext context)
+
+    public void Handle_OnInventoryChanged(InventoryEventArgs args)
     {
-        if (!context.IsPlayer) return;
+        bool itemMatches = args.Inventory.ContainsItem(_itemType);
 
-        Inventory playerInventory = context.User.GetComponent<PlayerController>().Inventory;
+        EnablePlacementPoint(itemMatches);
+    }
+    
+    public void Handle_OnInteractPress(InteractionContext context)
+    {
+        Inventory inv = context.User.GetComponent<Inventory>();
+        if (inv == null) return;
 
-        if (playerInventory == null || playerInventory.CarriedItem == null)
+        if (inv.ContainsItem(_itemType))
         {
-            Debug.Log("MISSING ITEM");
-        }
-        else if (playerInventory.CarriedItem?.UniqueId != _placementItemType.UniqueId)
-        {
-            Debug.Log("WRONG ITEM");
+            TryPlaceItem(inv);
         }
         else
         {
-            Debug.Log("This is the correct item for this spot");
+            Debug.Log("Not carrying the correct item");
         }
     }
 
-    protected void Handle_OnCarriedItemChanged(InventoryEventArgs args)
+    protected bool TryPlaceItem(Inventory inv)
     {
-        bool itemMatches = args.Inventory.CarriedItem?.UniqueId == _placementItemType.UniqueId;
+        inv.RemoveItem(_itemType);
 
-        EnablePlacementPoint(itemMatches);
+        if (_itemType.IsCarried)
+        {
+            Carryable _carriedItem = inv.gameObject.GetComponent<CarryController>().RemoveCarriedItem();
+            _carriedItem.gameObject.SetActive(false);
+        }
+
+        return true;
     }
 
     protected void EnablePlacementPoint(bool enable)
@@ -56,4 +61,6 @@ public class PlacementPoint : MonoBehaviour
         _placementOutline.SetActive(enable);
         _interaction.IsEnabled = enable;
     }
+
+    //protected bool 
 }

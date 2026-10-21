@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction
   _printDebugMessages: 1
+  _displayName: Name
   _enabled: 1
   InteractPressed:
     _PersistentCalls:
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42a162b862e72347b620a0bca310a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementPoint
-  _placementItemType: {fileID: 11400000, guid: 4349a85c6a6dff745a008b8532751246, type: 2}
+  _itemType: {fileID: 0}
   _placementOutline: {fileID: 5165326043448479388}
   _interaction: {fileID: 1126222903165052950}
 --- !u!114 &8501286247421580163
@@ -118,7 +119,7 @@ MonoBehaviour:
   _response:
     _PersistentCalls:
     - _Target: {fileID: 8105018800817562041}
-      _MemberName: Handle_OnCarriedItemChanged
+      _MemberName: Handle_OnInventoryChanged
       _PersistentArguments:
       - _Type: 14
         _Int: 1

@@ -64,16 +64,9 @@ public class CarryController : MonoBehaviour
             Debug.Log($"Already had an item, but swapped it with the new one");
         }
 
-        _heldItem = obj;
-        _heldItem.transform.SetParent(_itemAttachPoint);
-        _heldItem.transform.localPosition = Vector3.zero;
-        _heldItem.transform.localRotation = _itemAttachPoint.localRotation;
-        _heldItem.gameObject.layer = LayerMask.NameToLayer("Player");
-        _heldItem.EnablePhysics(false);
+        AttachCarryable(obj);
 
-        _inventory.SetCarriedItem(_heldItem.ItemData);
-
-        Debug.Log($"Now carrying {_heldItem.name}");
+        _inventory.AddItem(_heldItem.ItemData);
         
         return true;
     }
@@ -82,16 +75,46 @@ public class CarryController : MonoBehaviour
     {
         if (_heldItem == null) return false;
 
-        _heldItem.transform.SetParent(null);
-        _heldItem.transform.position = location;
-        _heldItem.gameObject.layer = _heldItem.OriginalLayer;
-        _heldItem.EnablePhysics(true);
+        Carryable obj = DetatchCarryable();
 
-        Debug.Log($"{_heldItem.name} has been put down again");
-        _heldItem = null;
-        _inventory.SetCarriedItem(null);
+        obj.transform.position = location;
+        _inventory.RemoveItem(obj.ItemData);
 
         return true;
+    }
+
+    public Carryable RemoveCarriedItem()
+    {
+        Carryable obj = DetatchCarryable();
+        _inventory.RemoveItem(obj.ItemData);
+
+        return obj;
+    }
+
+    protected void AttachCarryable(Carryable obj)
+    {
+        _heldItem = obj;
+        _heldItem.transform.SetParent(_itemAttachPoint);
+        _heldItem.transform.localPosition = Vector3.zero;
+        _heldItem.transform.localRotation = _itemAttachPoint.localRotation;
+        _heldItem.gameObject.layer = LayerMask.NameToLayer("Player");
+        _heldItem.EnablePhysics(false);
+
+        Debug.Log($"Now carrying {_heldItem.name}");
+    }
+
+    protected Carryable DetatchCarryable()
+    {
+        Carryable obj = _heldItem;
+        
+        _heldItem.transform.SetParent(null);
+        _heldItem.gameObject.layer = _heldItem.OriginalLayer;
+        _heldItem.EnablePhysics(true);
+        _heldItem = null;
+
+        Debug.Log($"{obj.name} has been put down again");
+
+        return obj;
     }
 
     protected Vector3 GetDropLocation()

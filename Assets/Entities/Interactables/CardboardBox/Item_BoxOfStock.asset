@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarriedItemData
   uniqueId: aa2f4cc3-c808-41d0-aa51-aed6147f19e9
   _displayName: 
+  _heldItem: 1

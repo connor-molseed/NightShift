@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UltEvents;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class Inventory : MonoBehaviour
     //State Variables
     [SerializeField] protected bool _hasKey = true;
     [SerializeField] protected bool _hasCutter = true;
+    [SerializeField] protected List<CarriedItemData> _items;
     [SerializeField] protected CarriedItemData _carriedItem;
     
     //Cached References
@@ -16,10 +18,11 @@ public class Inventory : MonoBehaviour
     //Properties
     public bool HasKey => _hasKey;
     public bool HasCutter => _hasCutter;
-    public CarriedItemData CarriedItem => _carriedItem;
+    //public CarriedItemData CarriedItem => _carriedItem;
 
     //Events
     [SerializeField] protected UltEvent<GameObject, InventoryEventArgs> OnInventoryUpdated;
+    
 
     public void SetHasKey(bool hasKey)
     {
@@ -31,10 +34,27 @@ public class Inventory : MonoBehaviour
         _hasCutter = hasCutter;
     }
 
-    public void SetCarriedItem(CarriedItemData item)
+    // public void SetCarriedItem(CarriedItemData item)
+    // {
+    //     _carriedItem = item;
+    //     TriggerInventoryUpdate();
+    // }
+
+    public void AddItem(CarriedItemData item)
     {
-        _carriedItem = item;
+        _items.Add(item);
         TriggerInventoryUpdate();
+    }
+
+    public void RemoveItem(CarriedItemData item)
+    {
+        _items.Remove(item);
+        TriggerInventoryUpdate();
+    }
+
+    public bool ContainsItem(CarriedItemData item)
+    {
+        return _items.Contains(item);
     }
 
     protected void TriggerInventoryUpdate()
@@ -46,4 +66,9 @@ public class Inventory : MonoBehaviour
         
         OnInventoryUpdated?.Invoke(gameObject, args);
     }
+
+    // public bool HasTool(Tool tool)
+    // {
+    //     return true;
+    // }
 }
