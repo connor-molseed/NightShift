@@ -1,15 +1,16 @@
 using System;
 using UnityEngine;
+using Core.Items;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Carryable : MonoBehaviour
 {
-    [SerializeField] protected CarriedItemData _itemData;
+    [SerializeField] protected ItemData _itemData;
 
     private int _originalLayer;
     protected Rigidbody _rb;
 
-    public CarriedItemData ItemData => _itemData;
+    public ItemData ItemData => _itemData;
     public int OriginalLayer => _originalLayer;
 
     protected virtual void Awake()
@@ -18,9 +19,9 @@ public class Carryable : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    protected void Handle_OnInteractPress(InteractionContext context)
+    protected void Handle_OnInteractPress(GameObject user)
     {
-        TryPickupObject(context.User);
+        TryPickupObject(user);
     }
 
     public void EnablePhysics(bool enable)

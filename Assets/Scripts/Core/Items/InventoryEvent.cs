@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Core.Items;
 
 [Serializable]
 [CreateAssetMenu(menuName = "Global Events/Inventory Event", fileName = "NewInventoryEvent")]

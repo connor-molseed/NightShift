@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using Core.Items;
+
 public class CarryController : MonoBehaviour
 {
     //Config Parameters

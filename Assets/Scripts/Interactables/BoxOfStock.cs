@@ -1,4 +1,6 @@
 using UnityEngine;
+using Core.Interaction;
+using Core.Items;
 
 //TODO Fix on hold interaction behaviour (currently only works if box is sealed)
 public class BoxOfStock : Carryable

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Core.Control;
 
 
 //TODO cameras bypass update frequency by switching back/forth. could use class that handles render update independantly 

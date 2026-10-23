@@ -1,4 +1,6 @@
 using UnityEngine;
+using Core.Control;
+using Core.Interaction;
 
 public class Interaction_SecurityCameraMonitor : MonoBehaviour
 {
