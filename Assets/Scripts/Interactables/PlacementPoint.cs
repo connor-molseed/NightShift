@@ -6,9 +6,9 @@ using Core.Interaction;
 public class PlacementPoint : MonoBehaviour
 {
     //Config Parameters
-    [SerializeField] protected ItemData _itemType;
-    [SerializeField] protected GameObject _placementOutline;
-    [SerializeField] protected Interactable _interaction;
+    [SerializeField] protected ItemData _requiredItem;
+    // [SerializeField] protected GameObject _placementOutline;
+    // [SerializeField] protected Interactable _interaction;
     
     //State Variables
     
@@ -25,7 +25,7 @@ public class PlacementPoint : MonoBehaviour
 
     public void Handle_OnInventoryChanged(InventoryEventArgs args)
     {
-        bool itemMatches = args.Inventory.ContainsItem(_itemType);
+        bool itemMatches = args.Inventory.ContainsItem(_requiredItem);
 
         EnablePlacementPoint(itemMatches);
     }
@@ -35,9 +35,19 @@ public class PlacementPoint : MonoBehaviour
         Inventory inv = context.User.GetComponent<Inventory>();
         if (inv == null) return;
 
-        if (inv.ContainsItem(_itemType))
+        if (inv.ContainsItem(_requiredItem))
         {
-            TryPlaceItem(inv);
+            if (_requiredItem.IsCarried)
+            {
+                Carryable _carriedItem = inv.gameObject.GetComponent<CarryController>().RemoveCarriedItem();
+                _carriedItem.gameObject.SetActive(false);
+            }
+            else
+            {
+                inv.RemoveItem(_requiredItem);
+            }
+
+
         }
         else
         {
@@ -45,24 +55,24 @@ public class PlacementPoint : MonoBehaviour
         }
     }
 
-    protected bool TryPlaceItem(Inventory inv)
-    {
-        inv.RemoveItem(_itemType);
+    // protected bool TryPlaceItem(Inventory inv)
+    // {
+    //     inv.RemoveItem(_requiredItem);
 
-        if (_itemType.IsCarried)
-        {
-            Carryable _carriedItem = inv.gameObject.GetComponent<CarryController>().RemoveCarriedItem();
-            _carriedItem.gameObject.SetActive(false);
-        }
+    //     if (_requiredItem.IsCarried)
+    //     {
+    //         Carryable _carriedItem = inv.gameObject.GetComponent<CarryController>().RemoveCarriedItem();
+    //         _carriedItem.gameObject.SetActive(false);
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
     protected void EnablePlacementPoint(bool enable)
     {
         Debug.Log($"Item Matches: {enable}");
-        _placementOutline.SetActive(enable);
-        _interaction.IsEnabled = enable;
+        // _placementOutline.SetActive(enable);
+        // _interaction.IsEnabled = enable;
     }
 
     //protected bool 

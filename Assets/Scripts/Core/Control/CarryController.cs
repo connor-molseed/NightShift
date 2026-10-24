@@ -67,8 +67,6 @@ public class CarryController : MonoBehaviour
         }
 
         AttachCarryable(obj);
-
-        _inventory.AddItem(_heldItem.ItemData);
         
         return true;
     }
@@ -80,7 +78,6 @@ public class CarryController : MonoBehaviour
         Carryable obj = DetatchCarryable();
 
         obj.transform.position = location;
-        _inventory.RemoveItem(obj.ItemData);
 
         return true;
     }
@@ -88,7 +85,6 @@ public class CarryController : MonoBehaviour
     public Carryable RemoveCarriedItem()
     {
         Carryable obj = DetatchCarryable();
-        _inventory.RemoveItem(obj.ItemData);
 
         return obj;
     }

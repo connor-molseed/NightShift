@@ -42,16 +42,21 @@ namespace Core.Items
         //     TriggerInventoryUpdate();
         // }
     
-        public void AddItem(ItemData item)
+        public bool AddItem(ItemData item)
         {
             _items.Add(item);
             TriggerInventoryUpdate();
+            return true;
         }
     
-        public void RemoveItem(ItemData item)
+        public bool RemoveItem(ItemData item)
         {
+            if (ContainsItem(item))
+                return false;
+
             _items.Remove(item);
             TriggerInventoryUpdate();
+            return true;
         }
     
         public bool ContainsItem(ItemData item)
