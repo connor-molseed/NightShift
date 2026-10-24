@@ -1,6 +1,8 @@
 using System.Collections;
 using UltEvents;
 using UnityEngine;
+using Core.Interaction;
+using Core.Items;
 
 //TODO Split door into the core, and the open/close and unlock/lock behaviours
 public class DoorBase : MonoBehaviour

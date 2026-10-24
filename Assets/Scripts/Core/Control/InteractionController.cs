@@ -1,0 +1,77 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
+
+using Core.Interaction;
+
+namespace Core.Control
+{
+    public class InteractionController : MonoBehaviour
+    {
+        [SerializeField] protected InputActionReference _interactButton;
+        [SerializeField] protected float _maxDistance = 20f;
+        [SerializeField] protected LayerMask _ignoredLayers;
+        protected Interactable _target;
+        protected Camera _camera;
+    
+        void Start()
+        {
+            _camera = Camera.main;
+        }
+    
+        void OnEnable()
+        {
+            Debug.Log("Doing an enable");
+            _interactButton.action.Enable();
+            _interactButton.action.performed += OnInteractPressed;
+        }
+    
+        void OnDisable()
+        {
+            Debug.Log("Doing a disable");
+            _interactButton.action.performed -= OnInteractPressed;
+        }
+    
+        void Update()
+        {
+            UpdateCurrentTarget();
+        }
+    
+        void UpdateCurrentTarget()
+        {
+            if (!_camera) return;
+    
+            Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
+            RaycastHit hit;
+    
+            if (Physics.Raycast(ray, out hit, _maxDistance, ~_ignoredLayers))
+            {
+                if (hit.collider.attachedRigidbody != null)
+                    _target = hit.collider.attachedRigidbody.GetComponent<Interactable>();
+                else
+                    _target = hit.collider.GetComponent<Interactable>();
+            }
+        }
+        
+        void OnInteractPressed(InputAction.CallbackContext context)
+        {
+            if (context.interaction is HoldInteraction)
+                TryDoInteract(InputType.Hold);
+            else if (context.interaction is PressInteraction)
+                TryDoInteract(InputType.Press);
+        }
+    
+        bool TryDoInteract(InputType inputType)
+        {
+            Debug.Log($"{_target?.name} is enabled: {_target?.IsEnabled}");
+    
+            if (_target != null && _target.IsEnabled)
+            {
+                InteractionContext context = new InteractionContext(gameObject, inputType: inputType);
+                _target.Interact(context);
+                return true;
+            }
+            return false;
+        }
+    }
+}

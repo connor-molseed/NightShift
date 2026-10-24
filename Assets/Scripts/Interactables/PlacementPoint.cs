@@ -1,11 +1,14 @@
 using UnityEngine;
 
+using Core.Items;
+using Core.Interaction;
+
 public class PlacementPoint : MonoBehaviour
 {
     //Config Parameters
-    [SerializeField] protected CarriedItemData _itemType;
+    [SerializeField] protected ItemData _itemType;
     [SerializeField] protected GameObject _placementOutline;
-    [SerializeField] protected Interaction _interaction;
+    [SerializeField] protected Interactable _interaction;
     
     //State Variables
     
