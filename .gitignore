@@ -108,3 +108,5 @@ InitTestScene*.unity*
 Packages/com.kybernetik.ultevents/Sample/
 
 Packages/com.kybernetik.ultevents/Sample.meta
+
+/.continue
