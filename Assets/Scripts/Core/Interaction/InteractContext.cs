@@ -6,13 +6,11 @@ namespace Core.Interaction
     {
         public GameObject User;
         public bool IsPlayer;
-        public InputType Type;
     
-        public InteractionContext (GameObject user, bool isPlayer = true, InputType inputType = InputType.Press)
+        public InteractionContext (GameObject user, bool isPlayer = true)
         {
             User = user;
             IsPlayer = isPlayer;
-            Type = inputType;
         }
     }
     

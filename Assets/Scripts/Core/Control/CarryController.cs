@@ -6,50 +6,60 @@ using Core.Items;
 public class CarryController : MonoBehaviour
 {
     //Config Parameters
+    [SerializeField] protected InputActionReference _grabInput;
+
     [SerializeField] protected Transform _itemAttachPoint;
-    [SerializeField] protected InputActionReference _dropButton;
     [SerializeField] protected float _dropDistance;
     
     //State Variables
     protected Carryable _heldItem;
 
     //Cached References
-    protected Inventory _inventory;
+    private TargetFinder _target;
 
     //Properties
     public Carryable CarriedItem => _heldItem;
+    public bool IsCarryingItem => _heldItem != null;
 
     //Events
 
 
     void Awake()
     {
-        _inventory = GetComponent<Inventory>();
+        
     }
 
     void OnEnable()
     {
         Debug.Log("Doing an enable");
-        _dropButton.action.Enable();
-        _dropButton.action.performed += HandleDropInput;
+        _grabInput.action.Enable();
+        _grabInput.action.performed += HandleInput;
     }
 
     void OnDisable()
     {
         Debug.Log("Doing a disable");
-        _dropButton.action.performed -= HandleDropInput;
+        _grabInput.action.performed -= HandleInput;
     }
 
-    public Carryable GetCurrentObject()
-    {
-        return _heldItem;
-    }
+    // public Carryable GetCurrentObject()
+    // {
+    //     return _heldItem;
+    // }
 
-    public void HandleDropInput(InputAction.CallbackContext context)
+    public void HandleInput(InputAction.CallbackContext context)
     {  
-        if (_heldItem == null) return;
+        Carryable carryable = _target.GetComponent<Carryable>();
+        if (carryable == null) return;
 
-        TryDropObject(GetDropLocation());
+        if (IsCarryingItem)
+        {
+            TryDropObject();
+        }
+        else
+        {
+            TryPickupObject(carryable);
+        }
     }
 
     public bool TryPickupObject(Carryable obj)
@@ -58,9 +68,9 @@ public class CarryController : MonoBehaviour
 
         if (_heldItem != null)
         {
-            if (!TryDropObject(obj.transform.position))
+            if (!TryDropObject())
             {
-                Debug.Log($"Already holding {_heldItem.name}, and cannot currently drop it");
+                Debug.Log($"Already holding {_heldItem.ItemData.name}, and cannot currently drop it");
                 return false;
             }
             Debug.Log($"Already had an item, but swapped it with the new one");
@@ -71,13 +81,13 @@ public class CarryController : MonoBehaviour
         return true;
     }
 
-    public bool TryDropObject(Vector3 location)
+    public bool TryDropObject()
     {
         if (_heldItem == null) return false;
 
         Carryable obj = DetatchCarryable();
 
-        obj.transform.position = location;
+        obj.transform.position = GetDropLocation();
 
         return true;
     }
@@ -92,13 +102,13 @@ public class CarryController : MonoBehaviour
     protected void AttachCarryable(Carryable obj)
     {
         _heldItem = obj;
-        _heldItem.transform.SetParent(_itemAttachPoint);
-        _heldItem.transform.localPosition = Vector3.zero;
-        _heldItem.transform.localRotation = _itemAttachPoint.localRotation;
-        _heldItem.gameObject.layer = LayerMask.NameToLayer("Player");
+        _heldItem.Root.SetParent(_itemAttachPoint);
+        _heldItem.Root.localPosition = Vector3.zero;
+        _heldItem.Root.localRotation = _itemAttachPoint.localRotation;
+        _heldItem.Root.gameObject.layer = LayerMask.NameToLayer("Player");
         _heldItem.EnablePhysics(false);
 
-        Debug.Log($"Now carrying {_heldItem.name}");
+        Debug.Log($"Now carrying {_heldItem.ItemData.name}");
     }
 
     protected Carryable DetatchCarryable()

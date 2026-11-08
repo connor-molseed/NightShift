@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Interaction
 {
-    public class Interactable : MonoBehaviour
+    public class GenericInteractable : MonoBehaviour, IInteractable
     {
         //Config Parameters
         [SerializeField] private bool _printDebugMessages = true;
@@ -27,19 +27,19 @@ namespace Core.Interaction
         //Events
         public UltEvent<InteractionContext> InteractPressed;
         public UltEvent<InteractionContext> InteractHeld;
-    
-        public void Interact(InteractionContext context)
+
+        public bool InteractPress(InteractionContext context)
         {
             if (_printDebugMessages) Debug.Log($"{name} was interacted with.");
-    
-            if (context.Type == InputType.Press)
-            {
-                InteractPressed.Invoke(context);
-            }
-            else if (context.Type == InputType.Hold)
-            {
-                InteractHeld.Invoke(context);
-            }
+            InteractPressed.Invoke(context);
+            return true;
+        }
+
+        public bool InteractHold(InteractionContext context)
+        {
+            if (_printDebugMessages) Debug.Log($"{name} was interacted with.");
+            InteractHeld.Invoke(context);
+            return true;
         }
     }
 }

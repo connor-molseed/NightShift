@@ -3,7 +3,7 @@ using Core.Interaction;
 using Core.Items;
 
 //TODO Fix on hold interaction behaviour (currently only works if box is sealed)
-public class BoxOfStock : Carryable
+public class BoxOfStock : MonoBehaviour, IInteractable
 {
     //Config Parameters
     [SerializeField] protected bool _startSealed;
@@ -24,14 +24,14 @@ public class BoxOfStock : Carryable
     
     //Properties
     public bool IsSealed => _isSealed;
-    
-    //Events
-    
+    public bool IsEnabled => true;
+    public string DisplayName => "Box of Stock";
 
-    protected override void Awake()
-    {
-        base.Awake();
-        
+    //Events
+
+
+    private void Awake()
+    {       
         _isSealed = _startSealed;
 
         _animator = GetComponent<Animator>();
@@ -39,12 +39,17 @@ public class BoxOfStock : Carryable
         ap_IsOpen = Animator.StringToHash(_paramIsOpen);
     }
 
-    protected void Handle_OnInteractHold(InteractionContext context)
+    public bool InteractPress(InteractionContext context)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool InteractHold(InteractionContext context)
     {
         if (_isSealed)
-            TryUnsealBox(context.User);
+            return TryUnsealBox(context.User);
         else
-            TryRemoveStock(context.User);
+            return TryRemoveStock(context.User);
     }
 
     public bool TryUnsealBox(GameObject user)
@@ -66,7 +71,7 @@ public class BoxOfStock : Carryable
         
         CarryController carrier = user.GetComponent<CarryController>();
 
-        if (carrier != null && carrier.GetCurrentObject() == null)
+        if (carrier != null && !carrier.IsCarryingItem)
         {
             _remainingStock--;
             Carryable newStock = Instantiate(_stockPrefab);
@@ -87,4 +92,6 @@ public class BoxOfStock : Carryable
         }
         return false;
     }
+
+
 }

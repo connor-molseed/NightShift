@@ -12,7 +12,7 @@ namespace Core.Control
         //Cached References
         protected Mover _mover;
         protected Looker _looker;
-        protected InteractionController _interactor;
+        protected InteractController _interactor;
         protected Inventory _inventory;
     
         //Properties
@@ -24,7 +24,7 @@ namespace Core.Control
         {
             _mover = GetComponent<Mover>();
             _looker = GetComponent<Looker>();
-            _interactor = GetComponent<InteractionController>();
+            _interactor = GetComponent<InteractController>();
             _inventory = GetComponent<Inventory>();
         }
     
