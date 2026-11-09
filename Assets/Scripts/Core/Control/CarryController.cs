@@ -15,7 +15,6 @@ public class CarryController : MonoBehaviour
     protected Carryable _heldItem;
 
     //Cached References
-    private TargetFinder _target;
 
     //Properties
     public Carryable CarriedItem => _heldItem;
@@ -49,17 +48,7 @@ public class CarryController : MonoBehaviour
 
     public void HandleInput(InputAction.CallbackContext context)
     {  
-        Carryable carryable = _target.GetComponent<Carryable>();
-        if (carryable == null) return;
-
-        if (IsCarryingItem)
-        {
-            TryDropObject();
-        }
-        else
-        {
-            TryPickupObject(carryable);
-        }
+        TryDropObject();
     }
 
     public bool TryPickupObject(Carryable obj)

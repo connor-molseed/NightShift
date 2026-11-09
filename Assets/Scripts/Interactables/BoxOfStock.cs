@@ -3,7 +3,7 @@ using Core.Interaction;
 using Core.Items;
 
 //TODO Fix on hold interaction behaviour (currently only works if box is sealed)
-public class BoxOfStock : MonoBehaviour, IInteractable
+public class BoxOfStock : Carryable
 {
     //Config Parameters
     [SerializeField] protected bool _startSealed;
@@ -24,14 +24,14 @@ public class BoxOfStock : MonoBehaviour, IInteractable
     
     //Properties
     public bool IsSealed => _isSealed;
-    public bool IsEnabled => true;
-    public string DisplayName => "Box of Stock";
 
     //Events
 
 
-    private void Awake()
-    {       
+    protected override void Awake()
+    {      
+        base.Awake();
+
         _isSealed = _startSealed;
 
         _animator = GetComponent<Animator>();
@@ -39,18 +39,21 @@ public class BoxOfStock : MonoBehaviour, IInteractable
         ap_IsOpen = Animator.StringToHash(_paramIsOpen);
     }
 
-    public bool InteractPress(InteractionContext context)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public bool InteractHold(InteractionContext context)
+    public override bool InteractPress(InteractionContext context)
     {
         if (_isSealed)
             return TryUnsealBox(context.User);
         else
             return TryRemoveStock(context.User);
     }
+
+    // public bool InteractHold(InteractionContext context)
+    // {
+    //     if (_isSealed)
+    //         return TryUnsealBox(context.User);
+    //     else
+    //         return TryRemoveStock(context.User);
+    // }
 
     public bool TryUnsealBox(GameObject user)
     {
@@ -84,6 +87,7 @@ public class BoxOfStock : MonoBehaviour, IInteractable
 
     protected bool UserHasCutter(GameObject user)
     {
+        return true;
         Inventory userInv = user.GetComponent<Inventory>();
 
         if (userInv != null)

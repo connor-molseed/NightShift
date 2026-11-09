@@ -12,7 +12,7 @@ namespace Core.Control
         //Config Parameters
         
         //State Variables
-        private TargetFinder _target;
+        private TargetFinder _targetFinder;
         private CarryController _grabHandler;
 
         //Cached References
@@ -23,8 +23,8 @@ namespace Core.Control
 
         void Awake()
         {
-            _target.GetComponent<TargetFinder>();
-            _grabHandler.GetComponent<CarryController>();
+            _targetFinder = GetComponent<TargetFinder>();
+            _grabHandler = GetComponent<CarryController>();
         }
 
         void OnEnable()
@@ -42,18 +42,21 @@ namespace Core.Control
         
         void HandleInput(InputAction.CallbackContext context)
         {
-            IInteractable interactable = _target.GetComponent<IInteractable>();
+            IInteractable interactable = _targetFinder.Target.GetComponent<IInteractable>();
+            Debug.Log($"Target is {_targetFinder.Target}");
+
+
             if (interactable == null) return;
 
             InteractionContext interactContext = new InteractionContext(gameObject);
 
             if (context.interaction is HoldInteraction)
             {
-                interactable.InteractPress(interactContext);
+                interactable.InteractHold(interactContext);
             }
             else if (context.interaction is PressInteraction)
             {
-                interactable.InteractHold(interactContext);
+                interactable.InteractPress(interactContext);
             }
         }
     }

@@ -44,5 +44,5 @@ public class TargetFinder : MonoBehaviour
         }
     }
 
-    public static implicit operator GameObject(TargetFinder value) => value.Target;
+    //public static implicit operator GameObject(TargetFinder value) => value.Target;
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Interaction
 {
-    public class GenericInteractable : MonoBehaviour, IInteractable
+    public class Interactable : MonoBehaviour, IInteractable
     {
         //Config Parameters
         [SerializeField] private bool _printDebugMessages = true;
@@ -16,7 +16,7 @@ namespace Core.Interaction
         //Cached References
         
         //Properties
-        public bool IsEnabled 
+        public bool IsInteractable 
         { 
             get { return _enabled; }
             set { _enabled = value; }
