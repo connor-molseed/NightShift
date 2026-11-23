@@ -3,7 +3,8 @@ using Core.Interaction;
 using Core.Items;
 
 //TODO Fix on hold interaction behaviour (currently only works if box is sealed)
-public class BoxOfStock : Carryable
+[RequireComponent(typeof(Carryable))]
+public class BoxOfStock : MonoBehaviour, IInteractable
 {
     //Config Parameters
     [SerializeField] protected bool _startSealed;
@@ -19,27 +20,29 @@ public class BoxOfStock : Carryable
     [SerializeField] protected int _remainingStock;
     
     //Cached References
+    protected Carryable _carryable;
     protected Animator _animator;
     protected int ap_IsOpen;
     
     //Properties
     public bool IsSealed => _isSealed;
+    public bool IsInteractable => true;
+    public string DisplayName => "Box of Stock";
 
     //Events
 
 
-    protected override void Awake()
+    protected void Awake()
     {      
-        base.Awake();
-
         _isSealed = _startSealed;
 
+        _carryable = GetComponent<Carryable>();
         _animator = GetComponent<Animator>();
 
         ap_IsOpen = Animator.StringToHash(_paramIsOpen);
     }
 
-    public override bool InteractPress(InteractionContext context)
+    public bool InteractPress(InteractionContext context)
     {
         if (_isSealed)
             return TryUnsealBox(context.User);
@@ -47,13 +50,16 @@ public class BoxOfStock : Carryable
             return TryRemoveStock(context.User);
     }
 
-    // public bool InteractHold(InteractionContext context)
-    // {
-    //     if (_isSealed)
-    //         return TryUnsealBox(context.User);
-    //     else
-    //         return TryRemoveStock(context.User);
-    // }
+    public bool InteractHold(InteractionContext context)
+    {
+        if (!IsInteractable) return false;
+
+        CarryController carrier = context.User.GetComponent<CarryController>();
+        if (carrier == null) return false;
+
+        carrier.TryPickupObject(_carryable);
+        return true;
+    }
 
     public bool TryUnsealBox(GameObject user)
     {

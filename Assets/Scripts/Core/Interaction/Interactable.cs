@@ -25,20 +25,21 @@ namespace Core.Interaction
         public string DisplayName => _displayName;
         
         //Events
-        public UltEvent<InteractionContext> InteractPressed;
-        public UltEvent<InteractionContext> InteractHeld;
+        public UltEvent<InteractionContext> OnInteractPressed;
+        public UltEvent<InteractionContext> OnInteractHeld;
 
         public bool InteractPress(InteractionContext context)
         {
             if (_printDebugMessages) Debug.Log($"{name} was interacted with.");
-            InteractPressed.Invoke(context);
+            OnInteractPressed.Invoke(context);
             return true;
         }
 
         public bool InteractHold(InteractionContext context)
         {
             if (_printDebugMessages) Debug.Log($"{name} was interacted with.");
-            InteractHeld.Invoke(context);
+
+            OnInteractHeld.Invoke(context);
             return true;
         }
     }

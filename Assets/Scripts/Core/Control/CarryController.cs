@@ -23,11 +23,6 @@ public class CarryController : MonoBehaviour
     //Events
 
 
-    void Awake()
-    {
-        
-    }
-
     void OnEnable()
     {
         Debug.Log("Doing an enable");

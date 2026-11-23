@@ -70,6 +70,7 @@ Transform:
   m_Children:
   - {fileID: 507977109864803051}
   - {fileID: 6156220736173353574}
+  - {fileID: 863688014903698994}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &2525927799631619522
@@ -152,11 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b808f2be43e334e8c31aba3d05af90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionController
-  _interactButton: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  _maxDistance: 20
-  _ignoredLayers:
-    serializedVersion: 2
-    m_Bits: 64
+  _interactInput: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &1561504947048795877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,8 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ae2f244c8f48f4dad62d4a359c11b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarryController
+  _grabInput: {fileID: 5347709621720356483, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _itemAttachPoint: {fileID: 6156220736173353574}
-  _dropButton: {fileID: 5347709621720356483, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _dropDistance: 0
 --- !u!114 &2256984125074994051
 MonoBehaviour:
@@ -191,8 +188,26 @@ MonoBehaviour:
   OnInventoryUpdated:
     _PersistentCalls:
     - _Target: {fileID: 11400000, guid: 847cf12f4066eb54db79adbdc7885f24, type: 2}
-      _MemberName: 
-      _PersistentArguments: []
+      _MemberName: Raise
+      _PersistentArguments:
+      - _Type: 14
+        _Int: 0
+        _String: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
+      - _Type: 14
+        _Int: 1
+        _String: InventoryEventArgs, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
 --- !u!114 &1099633178845582058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +226,37 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _target: {fileID: 0}
+--- !u!1 &4108455146022541770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 863688014903698994}
+  m_Layer: 6
+  m_Name: Carry1HAttachPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &863688014903698994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108455146022541770}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.36325115, z: -0, w: 0.9316913}
+  m_LocalPosition: {x: 1.0751387, y: 1.38, z: 2.5416498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3576106798304820838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6869259770514306207
 GameObject:
   m_ObjectHideFlags: 0

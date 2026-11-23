@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8389782229438625419}
   - component: {fileID: 3152899631007339354}
   - component: {fileID: 170260954290902300}
-  - component: {fileID: 1999730364445933516}
+  - component: {fileID: 5669521151153628254}
   - component: {fileID: 5319731457657266771}
   m_Layer: 7
   m_Name: BoxOfStock
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1999730364445933516
+--- !u!114 &5669521151153628254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,38 +116,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028659650443236339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01cc1c52a7d4640439e23fe6e42ab6e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ab2ab8605274904cae027c36b1d9af5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interaction
-  _printDebugMessages: 1
-  InteractPressed:
-    _PersistentCalls:
-    - _Target: {fileID: 5319731457657266771}
-      _MemberName: Handle_OnInteractPress
-      _PersistentArguments:
-      - _Type: 14
-        _Int: 0
-        _String: InteractionContext, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-          PublicKeyToken=null
-        _X: 0
-        _Y: 0
-        _Z: 0
-        _W: 0
-        _Object: {fileID: 0}
-  InteractHeld:
-    _PersistentCalls:
-    - _Target: {fileID: 5319731457657266771}
-      _MemberName: Handle_OnInteractHold
-      _PersistentArguments:
-      - _Type: 14
-        _Int: 0
-        _String: InteractionContext, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-          PublicKeyToken=null
-        _X: 0
-        _Y: 0
-        _Z: 0
-        _W: 0
-        _Object: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::Carryable
+  _itemData: {fileID: 11400000, guid: 00162dc780c5a6d4d9f66c655c03f45e, type: 2}
 --- !u!114 &5319731457657266771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,9 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1493c3038874ab64d85781774ae596c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxOfStock
-  _itemData: {fileID: 11400000, guid: 00162dc780c5a6d4d9f66c655c03f45e, type: 2}
   _startSealed: 1
-  _stockPrefab: {fileID: 6150941482371667767, guid: 9b133d38a1eaebc4db7c86b3b050ece8, type: 3}
+  _stockPrefab: {fileID: 3848166983003335722, guid: 9b133d38a1eaebc4db7c86b3b050ece8, type: 3}
   _totalStock: 3
   _paramIsOpen: IsOpen
   _isSealed: 0

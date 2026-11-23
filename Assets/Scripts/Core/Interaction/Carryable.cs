@@ -4,7 +4,7 @@ using Core.Items;
 using Core.Interaction;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Carryable : MonoBehaviour, IInteractable
+public class Carryable : MonoBehaviour
 {
     //Config Parameters
     [SerializeField] private ItemData _itemData;
@@ -54,23 +54,23 @@ public class Carryable : MonoBehaviour, IInteractable
         return true;
     }
 
-    public virtual bool InteractPress(InteractionContext context)
-    {
-        Debug.Log("No press interaction assigned");
+    // public virtual bool InteractPress(InteractionContext context)
+    // {
+    //     Debug.Log("No press interaction assigned");
 
-        if (!_isInteractable) return false;
-        Debug.Log("No press interaction assigned");
-        return true;
-    }
+    //     if (!_isInteractable) return false;
+    //     Debug.Log("No press interaction assigned");
+    //     return true;
+    // }
 
-    public virtual bool InteractHold(InteractionContext context)
-    {
-        if (!_isInteractable) return false;
+    // public virtual bool InteractHold(InteractionContext context)
+    // {
+    //     if (!_isInteractable) return false;
 
-        CarryController carrier = context.User.GetComponent<CarryController>();
-        if (carrier == null) return false;
+    //     CarryController carrier = context.User.GetComponent<CarryController>();
+    //     if (carrier == null) return false;
 
-        carrier.TryPickupObject(this);
-        return true;
-    }
+    //     carrier.TryPickupObject(this);
+    //     return true;
+    // }
 }
